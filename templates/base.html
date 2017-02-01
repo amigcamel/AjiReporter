@@ -1,0 +1,50 @@
+{% verbatim %}
+<!DOCTYPE html>
+<html lang="en" ng-app="DVReporterApp">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <!-- <link href="../../favicon.ico" rel="icon"> -->
+    <title>DV Reporter</title>
+    <link href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='/static/bower_components/textAngular/dist/textAngular.css'>
+    <link rel='stylesheet' href='/static/bower_components/font-awesome/css/font-awesome.min.css'>
+    <style>
+    .row {
+        padding-bottom: 20px;
+    }
+    </style>
+</head>
+<body ng-controller="BaseCtrl">
+    <div class="container">  
+        <div class="jumbotron text-center">
+            <h1>DV Reporter</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input class="form-control" ng-model="subject" placeholder="請輸入主旨">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div text-angular ng-model="htmlVariable"></div>
+            </div>
+        </div>
+        <pre><code>{{subject}}</code></pre>
+        <pre><code>{{htmlVariable}}</code></pre>
+    </div>
+    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script> 
+    <script src="/static/bower_components/angular/angular.min.js"></script> 
+    <script src="/static/bower_components/angular-animate/angular-animate.min.js"></script> 
+    <script src="/static/bower_components/angular-route/angular-route.min.js"></script>
+    <script src='/static/bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
+    <script src='/static/bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
+    <script src='/static/bower_components/textAngular/dist/textAngular.min.js'></script>
+    <script src="/static/js/ajireporter.js"></script> 
+
+</body>
+</html>
+{% endverbatim %}
