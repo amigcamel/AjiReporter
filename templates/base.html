@@ -27,7 +27,7 @@
     }
     .logo {
         border-radius: 50%;
-        width: 50%;
+        width: 40%;
     }
     .btn-custom,
     .btn-custom:hover,
@@ -38,21 +38,32 @@
         background-color: #b84d45;
         border-color: #b84d45;
     }
-    .btn-default:hover {
+    .btn-custom2 {
+        border-color: #b84d45;
+    }
+    .btn-custom2:hover {
         color: #ffffff;
         background-color: #b84d45;
         border-color: #b84d45;
+    }
+    .footer {
+        background-color: #b84d45;
+        font-size: 10px;
+        color: #ffffff;
+        min-height: 30px;
+        padding-top: 10px; 
+        vertical-align: middle;
     }
     </style>
 </head>
 {% verbatim %}
 <body ng-controller="BaseCtrl">
-    <div class="container header">
+    <div class="header">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <img src="/static/img/DV02.png" class="logo">
             </div>
-            <div class="col-md-9" style="padding-top:30px;font-size:42px">
+            <div class="col-md-8" style="padding-top:60px;font-size:42px">
                 溫先生日誌管理系統
             </div>
         </div>
@@ -60,13 +71,13 @@
     <div class="container">  
         <div class="row">
             <div class="col-md-offset-3 col-md-2 text-center">
-                <button class="btn btn-default btn-lg btn-block" ng-click="sendTest()">發送測試信</button>
+                <button class="btn btn-default btn-custom2 btn-lg btn-block" ng-click="sendTest()">發送測試信</button>
             </div>
             <div class="col-md-2 text-center">
-                <button class="btn btn-default btn-lg btn-block" ng-click="genCron();saveSettings()">儲存設定</button>
+                <button class="btn btn-default btn-custom2 btn-lg btn-block" ng-click="genCron();saveSettings()">儲存設定</button>
             </div>
             <div class="col-md-2 text-center">
-                <button class="btn btn-default btn-lg btn-block" ng-click="deleteSettings()">刪除設定</button>
+                <button class="btn btn-default btn-custom2 btn-lg btn-block" ng-click="deleteSettings()">刪除設定</button>
             </div>
         </div>
 
@@ -191,12 +202,14 @@
                 </div>
 
         </div>
-
         <!--
         <button class="btn btn-info" ng-click="test()">test</button>
         <pre><code>{{subject}}</code></pre>
         <pre><code>{{htmlVariable}}</code></pre>
         -->
+    </div>
+    <div class="footer text-center">
+        Copyright © 2017 Aji All rights reserved
     </div>
 {% endverbatim %}
     <script src="/static/bower_components/jquery/dist/jquery.min.js"></script> 
