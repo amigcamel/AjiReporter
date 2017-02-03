@@ -32,21 +32,24 @@ angular.module('DVReporterApp', ['textAngular', 'angularFileUpload'])
     };
 
     $scope.sendTest = function() {
-    	var mail = {
-    		subject: $scope.settings.subject,
-    		recipients: $scope.settings.recipients,
-    		content: $scope.settings.htmlVariable,
-            attachment: $scope.settings.uploader.queue.map(function(item) {return item.file.name})
-    	};
-    	$http({
-    		url: '/send_test/',
-    		method: 'POST',
-    		data: mail,
-    		headers: {
-	    		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'	
-    		}
-    	});
-    	console.log(mail);
+        if (confirm('注意，所有收件者將會收到此封信，確定發送？')) {
+            
+        	var mail = {
+        		subject: $scope.settings.subject,
+        		recipients: $scope.settings.recipients,
+        		content: $scope.settings.htmlVariable,
+                attachment: $scope.settings.uploader.queue.map(function(item) {return item.file.name})
+        	};
+        	$http({
+        		url: '/send_test/',
+        		method: 'POST',
+        		data: mail,
+        		headers: {
+    	    		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'	
+        		}
+        	});
+        	// console.log(mail);
+        }
     };
 
     $scope.genCron = function() {
