@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta content="" name="description">
     <meta content="" name="author">
-    <!-- <link href="../../favicon.ico" rel="icon"> -->
+    <link href="/static/img/favicon.ico" rel="icon">
     <title>DV Reporter</title>
     <link href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel='stylesheet' href='/static/bower_components/textAngular/dist/textAngular.css'>
@@ -15,24 +15,58 @@
     .row {
         padding-bottom: 40px;
     }
+    .header {
+        position: relative;
+        padding: 30px 30px 30px 60px;
+        text-align: left;
+        color: rgba(255, 255, 255, .8);
+        background-color: #b84d45;
+        background-image: url(/static/img/bg.png);
+        margin-bottom: 40px;
+        font-size: 20px;
+    }
+    .logo {
+        border-radius: 50%;
+        width: 50%;
+    }
+    .btn-custom,
+    .btn-custom:hover,
+    .btn-custom:active,
+    .btn-custom:visited,
+    .btn-custom:focus {
+        color: #ffffff;
+        background-color: #b84d45;
+        border-color: #b84d45;
+    }
+    .btn-default:hover {
+        color: #ffffff;
+        background-color: #b84d45;
+        border-color: #b84d45;
+    }
     </style>
 </head>
 {% verbatim %}
 <body ng-controller="BaseCtrl">
-    <div class="container">  
-        <div class="jumbotron text-center">
-            <h1>DV Reporter</h1>
+    <div class="container header">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="/static/img/DV02.png" class="logo">
+            </div>
+            <div class="col-md-9" style="padding-top:30px;font-size:42px">
+                溫先生日誌管理系統
+            </div>
         </div>
-
+    </div>
+    <div class="container">  
         <div class="row">
             <div class="col-md-offset-3 col-md-2 text-center">
-                <button class="btn btn-primary btn-lg btn-block" ng-click="sendTest()">發送測試信</button>
+                <button class="btn btn-default btn-lg btn-block" ng-click="sendTest()">發送測試信</button>
             </div>
             <div class="col-md-2 text-center">
-                <button class="btn btn-primary btn-lg btn-block" ng-click="genCron();saveSettings()">儲存設定</button>
+                <button class="btn btn-default btn-lg btn-block" ng-click="genCron();saveSettings()">儲存設定</button>
             </div>
             <div class="col-md-2 text-center">
-                <button class="btn btn-primary btn-lg btn-block" ng-click="deleteSettings()">刪除設定</button>
+                <button class="btn btn-default btn-lg btn-block" ng-click="deleteSettings()">刪除設定</button>
             </div>
         </div>
 
@@ -52,7 +86,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h4 style="display:inline-block">收件者（皆以附件密本傳送）</h4>
-                <button ng-hide="editRecipients" ng-click="editRecipients=!editRecipients" class="btn btn-info" style="float:right"><i class="fa fa-edit"></i> 編輯</button>
+                <button ng-hide="editRecipients" ng-click="editRecipients=!editRecipients" class="btn btn-custom" style="float:right"><i class="fa fa-edit"></i> 編輯</button>
                 <div ng-show="editRecipients" class="btn-group" style="float:right">
                     <button ng-click="editRecipients=!editRecipients;saveRecipients()" class="btn btn-default"><i class="fa fa-check"></i> 完成</button>
                     <button ng-click="editRecipients=!editRecipients" class="btn btn-default"><i class="fa fa-times"></i> 取消</button>
