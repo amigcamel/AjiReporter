@@ -2,7 +2,7 @@ from django.shortcuts import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseForbidden
 from django.conf import settings
-from sender import send_mail
+from utils.sender import send_mail
 import json
 import os
 
