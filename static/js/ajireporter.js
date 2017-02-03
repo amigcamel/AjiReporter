@@ -33,7 +33,7 @@ angular.module('DVReporterApp', ['textAngular', 'angularFileUpload'])
 
     $scope.sendTest = function() {
         if (confirm('注意，所有收件者將會收到此封信，確定發送？')) {
-            
+
         	var mail = {
         		subject: $scope.settings.subject,
         		recipients: $scope.settings.recipients,
@@ -109,7 +109,7 @@ angular.module('DVReporterApp', ['textAngular', 'angularFileUpload'])
     };
 
     $scope.loadSettings = function() {
-        $http.get('/crud_settings')
+        $http.get('/crud_settings/')
             .then(function(resp) {
                 var settings = resp.data;
                 if (settings != 'nodata') {
@@ -144,7 +144,7 @@ angular.module('DVReporterApp', ['textAngular', 'angularFileUpload'])
     };
 
     $scope.deleteSettings = function() {
-        $http.delete('/crud_settings');
+        $http.delete('/crud_settings/');
         window.location.reload();
     };
 
