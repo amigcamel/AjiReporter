@@ -32,29 +32,36 @@
 
         <div class="row text-center">
             <div class="col-md-12 form-inline" style="font-size:18px">
-                每日發送時間： <input class="form-control" type="number" min="0" max="23" ng-model="hour">時
-                <input class="form-control" type="number" min="0" max="59" ng-model="minute">分
+                每日發送時間： <input class="form-control" type="number" min="0" max="23" ng-model="settings.hour">時
+                <input class="form-control" type="number" min="0" max="59" ng-model="settings.minute">分
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                <input class="form-control" ng-model="subject" placeholder="請輸入主旨">
+                <h4>主旨</h4>
+                <input class="form-control" ng-model="settings.subject" placeholder="請輸入主旨">
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h4>收件者（皆以附件密本傳送）</h4>
+                <h4 style="display:inline-block">收件者（皆以附件密本傳送）</h4>
+                <button ng-hide="editRecipients" ng-click="editRecipients=!editRecipients" class="btn btn-info" style="float:right"><i class="fa fa-edit"></i> 編輯</button>
+                <div ng-show="editRecipients" class="btn-group" style="float:right">
+                    <button ng-click="editRecipients=!editRecipients;saveRecipients()" class="btn btn-default"><i class="fa fa-check"></i> 完成</button>
+                    <button ng-click="editRecipients=!editRecipients" class="btn btn-default"><i class="fa fa-times"></i> 取消</button>
+                </div>
+                <textarea ng-show="editRecipients" class="form-control" rows="5" ng-model="recipientsEdit"></textarea>
             </div>
-            <div class="col-md-12" style="height:100px;overflow:scroll">
+            <div ng-hide="editRecipients" class="col-md-12" style="height:100px;overflow:scroll">
                 <ol>
-                    <li ng-repeat="recipient in recipients"><code>{{recipient}}</code></li>
+                    <li ng-repeat="recipient in settings.recipients"><code>{{recipient}}</code></li>
                 </ol>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div text-angular ng-model="htmlVariable"></div>
+                <div text-angular ng-model="settings.htmlVariable"></div>
             </div>
         </div>
         <div class="row">
