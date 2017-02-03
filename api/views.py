@@ -70,3 +70,24 @@ def view_gen_cron(request):
         gen_cron(**kw_gen_cron)
         return HttpResponse('ok')
     return HttpResponseForbidden()
+
+
+@csrf_exempt
+def crud_settings(request):
+    """Save settings."""
+    if request.method == 'GET':
+        if os.path.isfile('settings.json'):
+            with open('settings.json') as jf:
+                settings = json.load(jf)
+            return HttpResponse(settings)
+        else:
+            return HttpResponse('nodata')
+    elif request.method == 'POST':
+        settings = request.body
+        with open('settings.json', 'w') as jf:
+            json.dump(settings, jf)
+        return HttpResponse('ok')
+    elif request.method == 'DELETE':
+        os.remove('settings.json')
+        return HttpResponse('ok')
+    return HttpResponseForbidden()

@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^uploader/', api_views.uploader),
     url(r'^send_test/', api_views.send_test),
     url(r'^view_gen_cron/', api_views.view_gen_cron),
+    url(r'^crud_settings/', api_views.crud_settings),
 ]
