@@ -10,7 +10,7 @@ from mimetypes import guess_type
 from os.path import join
 
 
-def send_mail(username, password, send_from, send_to, subject, html, file_dir='', attachments=None, plain=None):
+def send_mail(username, password, send_from, send_to, subject, html, file_dir='', attachment=None, plain=None):
     msg = MIMEMultipart('mixed')
     msg['From'] = send_from
     # msg['To'] = send_to
@@ -24,8 +24,8 @@ def send_mail(username, password, send_from, send_to, subject, html, file_dir=''
         part2 = MIMEText(plain, 'plain', 'utf-8')
         msg.attach(part2)
 
-    if attachments:
-        for f in attachments:
+    if attachment:
+        for f in attachment:
             f = join(file_dir, f)
             print(f)
             content_type = guess_type(f)[0].split('/')[1]

@@ -125,3 +125,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+
+# create directory for uploaded files
+UPLOAD_FILE_DIR = os.path.join(BASE_DIR, 'upload_files')
+if not os.path.isdir(UPLOAD_FILE_DIR):
+    os.mkdir(UPLOAD_FILE_DIR)
