@@ -4,3 +4,5 @@ static/bower_components/*
 *.pyc
 upload_files/*
 ajireporter/credentials.py
+ajireporter_cron
+kw.json
