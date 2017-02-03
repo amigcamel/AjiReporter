@@ -21,7 +21,7 @@ def uploader(request):
 
 
 @csrf_exempt
-def sendmail(request):
+def send_test(request):
     """Email sender."""
     if request.method == 'POST':
         dic = json.loads(request.body)
