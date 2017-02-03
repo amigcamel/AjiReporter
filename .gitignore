@@ -6,3 +6,4 @@ upload_files/*
 ajireporter/credentials.py
 ajireporter_cron
 kw.json
+settings.json
