@@ -44,6 +44,28 @@ angular.module('DVReporterApp', ['textAngular', 'angularFileUpload'])
     	console.log(mail);
     };
 
+    $scope.genCron = function() {
+        var kw = {
+            subject: $scope.settings.subject,
+            recipients: $scope.settings.recipients,
+            content: $scope.settings.htmlVariable,
+            attachment: $scope.uploader.queue.map(function(item) {return item.file.name}),
+            hour: $scope.settings.hour,
+            minute: $scope.settings.minute
+        };
+
+        $http({
+            url: '/view_gen_cron/',
+            method: 'POST',
+            data: kw,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'  
+            }
+        });
+
+        
+    };
+
     // $scope.test = function() {
     // 	console.log($scope.uploader);
     // };

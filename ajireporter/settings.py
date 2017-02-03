@@ -131,3 +131,15 @@ STATICFILES_DIRS = (
 UPLOAD_FILE_DIR = os.path.join(BASE_DIR, 'upload_files')
 if not os.path.isdir(UPLOAD_FILE_DIR):
     os.mkdir(UPLOAD_FILE_DIR)
+
+
+# for crontab
+PYENV_NAME = 'ajireporter'
+CRONTAB_DIR = '/etc/cron.d'
+CRONTAB_NAME = 'ajireporter_cron'
+CRONTAB_PATH = os.path.join(CRONTAB_DIR, CRONTAB_NAME)
+SENDER_CLI = os.path.join(BASE_DIR, 'utils', 'sender.py')  # path for gen_cron.py
+
+MAIL_KW = os.path.join(BASE_DIR, 'kw.json')
+
+USER = 'achiii'  # for crontab and pyenv

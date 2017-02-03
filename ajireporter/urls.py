@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='base.html'), name='base'),
     url(r'^uploader/', api_views.uploader),
     url(r'^send_test/', api_views.send_test),
+    url(r'^view_gen_cron/', api_views.view_gen_cron),
 ]

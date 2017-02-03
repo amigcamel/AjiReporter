@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseForbidden
 from django.conf import settings
 from utils.sender import send_mail
+from utils.gen_cron import gen_cron
 from ajireporter.credentials import EMAIL_ACCOUNT, EMAIL_PASSWORD
 import json
 import os
@@ -25,17 +26,47 @@ def send_test(request):
     """Email sender."""
     if request.method == 'POST':
         dic = json.loads(request.body)
-        print(dic)
-        send_mail(
-            username=EMAIL_ACCOUNT,
-            password=EMAIL_PASSWORD,
-            send_from=EMAIL_ACCOUNT,
-            send_to=dic['recipients'],
-            subject=dic['subject'],
-            html=dic['content'],
-            file_dir=settings.UPLOAD_FILE_DIR,
-            attachment=dic['attachment'],
-            plain=None
-        )
+        kw = {
+            'username': EMAIL_ACCOUNT,
+            'password': EMAIL_PASSWORD,
+            'send_from': EMAIL_ACCOUNT,
+            'send_to': dic['recipients'],
+            'subject': dic['subject'],
+            'html': dic['content'],
+            'file_dir': settings.UPLOAD_FILE_DIR,
+            'attachment': dic['attachment']
+        }
+        send_mail(**kw)
+        return HttpResponse('ok')
+    return HttpResponseForbidden()
+
+
+@csrf_exempt
+def view_gen_cron(request):
+    """View for generating cronjob."""
+    if request.method == 'POST':
+        dic = json.loads(request.body)
+        mail_kw = {
+            'username': EMAIL_ACCOUNT,
+            'password': EMAIL_PASSWORD,
+            'send_from': EMAIL_ACCOUNT,
+            'send_to': dic['recipients'],
+            'subject': dic['subject'],
+            'html': dic['content'],
+            'file_dir': settings.UPLOAD_FILE_DIR,
+            'attachment': dic['attachment']
+        }
+        with open(settings.MAIL_KW, 'w') as jf:
+            json.dump(mail_kw, jf)
+
+        kw_gen_cron = {
+            'minute': dic['minute'],
+            'hour': dic['hour'],
+            'user': settings.USER,
+            'pyenv_name': settings.PYENV_NAME,
+            'sender_cli': settings.SENDER_CLI,
+            'mail_kw': settings.MAIL_KW
+        }
+        gen_cron(**kw_gen_cron)
         return HttpResponse('ok')
     return HttpResponseForbidden()
