@@ -34,7 +34,7 @@ angular.module('DVReporterApp', ['textAngular', 'angularFileUpload'])
             attachment: $scope.uploader.queue.map(function(item) {return item.file.name})
     	};
     	$http({
-    		url: '/sendmail/',
+    		url: '/send_test/',
     		method: 'POST',
     		data: mail,
     		headers: {
