@@ -127,13 +127,13 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h3>主旨</h3>
+                <h3><i class="fa fa-lightbulb-o"></i> 主旨</h3>
                 <input class="form-control" ng-model="settings.subject" placeholder="請輸入主旨">
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h3 style="display:inline-block">收件者（皆以附件密本傳送）</h3>
+                <h3 style="display:inline-block"><i class="fa fa-list-alt"></i> 收件者（皆以附件密本傳送）</h3>
                 <button ng-hide="editRecipients" ng-click="editRecipients=!editRecipients" class="btn btn-custom" style="float:right"><i class="fa fa-edit"></i> 編輯</button>
                 <div ng-show="editRecipients" class="btn-group" style="float:right">
                     <button ng-click="editRecipients=!editRecipients;saveRecipients()" class="btn btn-default"><i class="fa fa-check"></i> 完成</button>
@@ -149,7 +149,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h3>信件內容</h3>
+                <h3><i class="fa fa-envelope-o"></i> 信件內容</h3>
                 <div text-angular ng-model="settings.htmlVariable"></div>
             </div>
         </div>
@@ -167,7 +167,7 @@
             -->
                 <div class="col-md-12">
 
-                    <h3>附加檔案</h3>
+                    <h3><i class="fa fa-paperclip"></i> 附加檔案</h3>
                     <input type="file" nv-file-select="" uploader="settings.uploader" multiple  /><br/>
 
                     <hr>
