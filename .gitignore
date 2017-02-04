@@ -3,6 +3,7 @@ db.sqlite3
 static/bower_components/*
 *.pyc
 upload_files/*
+credentials.py
 ajireporter_cron
 kw.json
 settings.json
