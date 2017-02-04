@@ -13,7 +13,7 @@
     <link rel='stylesheet' href='/static/bower_components/font-awesome/css/font-awesome.min.css'>
     <style>
     .row {
-        padding-bottom: 40px;
+        padding-bottom: 50px;
     }
     .header {
         position: relative;
@@ -54,9 +54,12 @@
         padding-top: 10px; 
         vertical-align: middle;
     }
+    .form-control:focus {
+        border-color: #b84d45;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+    }
     </style>
 </head>
-{% verbatim %}
 <body ng-controller="BaseCtrl">
     <div class="header">
         <div class="row">
@@ -68,9 +71,9 @@
             </div>
         </div>
     </div>
-    <div class="container" style="margin-top:0px;"> 
-    <!--
-        <div class="row">
+    {% if not user.is_authenticated %}
+    <div class="container" style="margin-top:100px;margin-bottom:100px;"> 
+        <div class="row"> <!--login page start -->
             <div class="col-md-offset-3 col-md-6 text-center">
                 <div class="row">
                     <div class="col-md-12"><h3>請先登入</div>
@@ -79,12 +82,12 @@
                     <div class="col-md-12">
                         <form ng-submit="login()">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-envelope fa-2x"></i></span>
-                                <input  class="form-control input-lg" placeholder="帳號" required="required" maxlength="100" type="text" name="email" value="">
+                                <span class="input-group-addon"><i class="fa fa-user fa-2x"></i></span>
+                                <input  class="form-control input-lg" placeholder="帳號" required="required" maxlength="100" type="text" name="text" value="" ng-model="username">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>
-                                <input  class="form-control input-lg" placeholder="Password" required="required" maxlength="60" type="password" name="password">
+                                <input  class="form-control input-lg" placeholder="Password" required="required" maxlength="60" type="password" name="password" ng-model="password">
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-block btn-custom btn-lg">登入</button>
@@ -93,12 +96,15 @@
                     </div>
                 </div>
             </div>
-        </div>
-        -->
+        </div><!-- login page end-->
+    </div>
+    {% endif %}
 
-
+    {% if user.is_authenticated %}
+    {% verbatim %}
+    <div class="container" style="margin-top:0px;"> 
         <div class="row">
-            <div class="col-md-offset-3 col-md-2 text-center">
+            <div class="col-md-offset-2 col-md-2 text-center">
                 <button class="btn btn-default btn-custom2 btn-lg btn-block" ng-click="sendTest()">發送測試信</button>
             </div>
             <div class="col-md-2 text-center">
@@ -106,6 +112,9 @@
             </div>
             <div class="col-md-2 text-center">
                 <button class="btn btn-default btn-custom2 btn-lg btn-block" ng-click="deleteSettings()">刪除設定</button>
+            </div>
+            <div class="col-md-2 text-center">
+                <button class="btn btn-default btn-custom2 btn-lg btn-block" onclick="location.href='/logout/'">登出</button>
             </div>
         </div>
 
@@ -118,13 +127,13 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h4>主旨</h4>
+                <h3>主旨</h3>
                 <input class="form-control" ng-model="settings.subject" placeholder="請輸入主旨">
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h4 style="display:inline-block">收件者（皆以附件密本傳送）</h4>
+                <h3 style="display:inline-block">收件者（皆以附件密本傳送）</h3>
                 <button ng-hide="editRecipients" ng-click="editRecipients=!editRecipients" class="btn btn-custom" style="float:right"><i class="fa fa-edit"></i> 編輯</button>
                 <div ng-show="editRecipients" class="btn-group" style="float:right">
                     <button ng-click="editRecipients=!editRecipients;saveRecipients()" class="btn btn-default"><i class="fa fa-check"></i> 完成</button>
@@ -140,6 +149,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                <h3>信件內容</h3>
                 <div text-angular ng-model="settings.htmlVariable"></div>
             </div>
         </div>
@@ -157,7 +167,7 @@
             -->
                 <div class="col-md-12">
 
-                    <h4>附加檔案</h4>
+                    <h3>附加檔案</h3>
                     <input type="file" nv-file-select="" uploader="settings.uploader" multiple  /><br/>
 
                     <hr>
@@ -236,10 +246,11 @@
         <pre><code>{{htmlVariable}}</code></pre>
         -->
     </div>
+    {% endverbatim %}
+    {% endif %}
     <div class="footer text-center">
         Copyright © 2017 Aji All rights reserved
     </div>
-{% endverbatim %}
     <script src="/static/bower_components/jquery/dist/jquery.min.js"></script> 
     <script src="/static/bower_components/angular/angular.min.js"></script> 
     <script src="/static/bower_components/angular-animate/angular-animate.min.js"></script> 
@@ -249,6 +260,5 @@
     <script src='/static/bower_components/textAngular/dist/textAngular.min.js'></script>
     <script src='/static/bower_components/angular-file-upload/dist/angular-file-upload.min.js'></script>
     <script src="/static/js/ajireporter.js"></script> 
-
 </body>
 </html>

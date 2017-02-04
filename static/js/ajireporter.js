@@ -8,10 +8,36 @@ angular.module('DVReporterApp', ['textAngular', 'angularFileUpload'])
 // }])
 
 .controller('BaseCtrl', ['$scope', 'FileUploader', '$http', function($scope, FileUploader, $http) {
+
+    // login
+    $scope.login = function() {
+        var data = {
+            username: $scope.username,
+            password: $scope.password
+        };
+        $http({
+            url: '/login/',
+            method: 'POST',
+            data: data,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'  
+            }
+        }).then(function(resp) {
+            if (resp.data == 'ok') {
+                window.location.reload();
+            } else {
+                alert('帳號或密碼有誤！')
+            }
+        })
+    };
+
+    var date = new Date().toLocaleDateString().split('/');
+    date = date[2] + '/' + date[0] + '/' + date[1]
+
     $scope.settings = {};
     $scope.settings.htmlVariable = '<h1 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><b><span lang="EN-US">'
-    $scope.settings.htmlVariable += new Date().toJSON().replace(/-/gi, '.').split('T')[0]
-    $scope.settings.htmlVariable += '</span><span>網路輿情摘</span><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><span>要<span lang="EN-US"></span></span></b></h1><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span lang="EN-US">1.</span><span>【     】：</span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span lang="EN-US">*</span><b><u><span>社群論壇</span></u></b><span>評價：<span lang="EN-US"></span></span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span lang="EN-US">*</span><b><u><span>新聞網站</span></u></b><span>評價：<span lang="EN-US"></span></span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span lang="EN-US">*</span><span>網友留言：<span lang="EN-US">(</span>摘要均全文轉貼網友留言<span lang="EN-US">)</span></span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><span>正評摘要：<span lang="EN-US"></span></span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span>負評摘要：</span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span>以上報告長官</span></h4>'
+    $scope.settings.htmlVariable += date
+    $scope.settings.htmlVariable += ' </span><span>網路輿情摘</span><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><span>要<span lang="EN-US"></span></span></b></h1><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span lang="EN-US">1.</span><span>【     】：</span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span lang="EN-US">*</span><b><u><span>社群論壇</span></u></b><span>評價：<span lang="EN-US"></span></span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span lang="EN-US">*</span><b><u><span>新聞網站</span></u></b><span>評價：<span lang="EN-US"></span></span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span lang="EN-US">*</span><span>網友留言：<span lang="EN-US">(</span>摘要均全文轉貼網友留言<span lang="EN-US">)</span></span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><a rel="nofollow" style="color: rgb(25, 106, 212);background-color: transparent;"></a><span>正評摘要：<span lang="EN-US"></span></span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span>負評摘要：</span></h4><h4 style="text-align: left;color: rgb(85, 85, 85);background-color: rgb(255, 255, 255);"><span>以上報告長官</span></h4>'
     $scope.settings.uploader = new FileUploader({
         url: '/uploader/'
     });
@@ -21,7 +47,7 @@ angular.module('DVReporterApp', ['textAngular', 'angularFileUpload'])
         });
     }
 
-    $scope.settings.subject = new Date().toJSON().replace('T', '-').split('-').slice(1,3).join('')+'新北市網路輿情日報表'
+    $scope.settings.subject = date+' 新北市網路輿情日報表'
     $scope.settings.hour = 3;
     $scope.settings.minute = 30;
     $scope.settings.recipients = [];

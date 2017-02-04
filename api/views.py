@@ -1,13 +1,39 @@
 """View for 'api'."""
-from django.shortcuts import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponseForbidden
-from django.conf import settings
-from utils.sender import send_mail
-from utils.gen_cron import gen_cron
-from ajireporter.credentials import EMAIL_ACCOUNT, EMAIL_PASSWORD
 import json
 import os
+
+from django.conf import settings
+from django.contrib import auth
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseForbidden
+from django.shortcuts import HttpResponse, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
+
+from ajireporter.credentials import EMAIL_ACCOUNT, EMAIL_PASSWORD
+
+from utils.gen_cron import gen_cron
+from utils.sender import send_mail
+
+
+@csrf_exempt
+def login(request):
+    """User login."""
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username, password = data.get('username'), data.get('password')
+        user = auth.authenticate(username=username, password=password)
+        if user is not None and user.is_active:
+            auth.login(request, user)
+            return HttpResponse('ok')
+    else:
+        raise PermissionDenied
+    return HttpResponse('')
+
+
+def logout(request):
+    """User logout."""
+    auth.logout(request)
+    return HttpResponseRedirect('/')
 
 
 @csrf_exempt
